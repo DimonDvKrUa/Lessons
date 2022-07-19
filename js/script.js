@@ -1,39 +1,53 @@
 'use strict';
 
-const personalPlanPeter = {
-    name: "Peter",
-    age: "29",
-    skills: {
-        languages: ['ru', 'eng'],
-        programmingLangs: {
-            js: '20%',
-            php: '10%'
-        },
-        exp: '1 month'
-    },
-    showAgeAndLangs(plan) {
-        const {age, skills: {languages}} = plan;
-        return `Мне ${age} и я владею языками: ${languages.join(' ').toUpperCase()}`;
+const family = ['Peter', 'Ann', 'Alex', 'Linda'];
+function showFamily(arr) {
+    if (arr.length > 0) {
+        return `Семья состоит из: ${arr.join(' ')}`;
+    } else {
+        return `Семья пуста`;
     }
-};
-
-// function showExperience(plan) {
-//     const {skills: {exp}} = plan;
-//     return exp;
-// }
-
-// console.log(showExperience(personalPlanPeter));
+}
+console.log(showFamily([family]));
 
 
-// function showProgrammingLangs(plan) {
-//     const {skills: {programmingLangs}} = plan;
-//     let txt='';
-//     for (let key in programmingLangs) {
-//         txt += `Язык ${key} изучен на ${programmingLangs[key]}\n`;
-//     }
-//     return txt;
-// }
+const favoriteCities = ['liSBon', 'ROME', 'miLan', 'Dublin'];
+function standardizeStrings(arr) {
+    for (let key in arr) {
+        console.log(arr[key].toLowerCase());
+    }
+}
+standardizeStrings(favoriteCities);
 
-// console.log(showProgrammingLangs(personalPlanPeter));
+const someString = 'This is some strange string';
 
-console.log(personalPlanPeter.showAgeAndLangs(personalPlanPeter));
+function reverse(str) {
+    if (typeof(str) === 'string') {
+        let arr = [...str].reverse();
+        return arr.join('');
+    } else {
+        return 'Ошибка!';
+    }
+}
+
+console.log(reverse(someString));
+
+const baseCurrencies = ['USD', 'EUR'];
+const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
+//console.log(baseCurrencies.concat(additionalCurrencies));
+
+function availableCurr(arr, missingCurr) {
+    if (arr.length > 0) {
+        let str = 'Доступные валюты:\n';
+        for (let key in arr) {
+            if (arr[key] !== missingCurr) {
+                str += `${arr[key]}\n`;
+            }
+        }
+        return str;
+    } else {
+        return ('нет доступных валют');
+    }
+}
+
+console.log(availableCurr(baseCurrencies.concat(additionalCurrencies), 'UAH'));
