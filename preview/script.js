@@ -1,28 +1,18 @@
-'use strict';
+// console.log(document.head); 
+// console.log(document.documentElement); 
+console.log(document.body.childNodes); 
 
-const btns = document.querySelectorAll('button'),
-      overlay = document.querySelector('.overlay');
+// console.log(document.body.firstChild);
+// console.log(document.body.lastChild);
 
-// btn.onclick = function() {
-//     alert('dsfs');
-// };
+// console.log(document.querySelector('#current').parentNode);
+// console.log(document.querySelector('#current').parentElement);
 
-const  delElement = (event) => {
-    console.log(event.currentTarget);
-    //event.target.remove();
-    // btn.removeEventListener('mouseenter', delElement);
-};
+// console.log(document.querySelector('[data-current="3"]').nextElementSibling);
 
-// btn.addEventListener('click', delElement);
-// overlay.addEventListener('click', delElement);
-
-btns.forEach(btn => {
-    btn.addEventListener('click', delElement, {'once': true});
-});
-
-const link = document.querySelector('a');
-
-link.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log(e.target);
-});
+for (let node of document.body.childNodes) {
+    if (node.nodeName == '#text') {
+        continue;
+    }
+    console.log(node);
+}       
