@@ -1,3 +1,9 @@
+// Назначить действие кнопке
+const button = document.querySelector('button');
+button.addEventListener('click', () => {
+    console.log();
+});
+
 //Простой таймер (ожидание выполнения)
 const timerId = setTimeout(function(text) {
     console.log(text);
@@ -40,3 +46,13 @@ function myAnimation () {
     }
 }
 btn.addEventListener('click', myAnimation);
+
+// Параметры документа
+// https://drive.google.com/file/d/1eTxWzmaDfN0CXHC7Dv_AE39A1GlNO1nI/view
+
+// Полчучить координаты элемента на странице
+const box = document.querySelector('.box');
+box.getBoundingClientRect();
+
+// Получить стили, не инлайн
+const style = window.getComputedStyle(box);
