@@ -1,5 +1,94 @@
 window.addEventListener('DOMContentLoaded', () => {
 
+    class MenuItem {
+        constructor(img, alt, subtitle, descr, total, parrentSelector) {
+            this.img = img;
+            this.alt = alt;
+            this.subtitle = subtitle;
+            this.descr = descr;
+            this.total = total;
+            this.parrent = document.querySelector(parrentSelector);
+            this.transfer = 27;
+            this.changeToUAH();
+        }
+    
+        changeToUAH() {
+            this.total = this.total * this.transfer;
+        }
+
+        createItem() {
+            // console.log(fields);
+            // fields.appendChild('div').className = 'menu__item';
+
+            let div = document.createElement('div'); 
+            div.innerHTML = `
+                <div class="menu__item">
+                    <img src="${this.img}" alt="${this.alt}">
+                    <h3 class="menu__item-subtitle">${this.subtitle}</h3>
+                    <div class="menu__item-descr">${this.descr}</div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost">Цена:</div>
+                        <div class="menu__item-total"><span>${this.total}</span> грн/день</div>
+                    </div>
+                </div>            
+            `;
+
+            this.parrent.append(div);
+
+            // const img = document.createElement('img');
+            // img.setAttribute('src',this.img);
+            // img.setAttribute('alt', this.alt);
+            // div.appendChild(img);
+
+            // const h = document.createElement('h3');
+            // h.className = 'menu__item-subtitle';
+            // h.innerText = this.subtitle;
+            // div.appendChild(h);
+
+            // const descr = document.createElement('div');
+            // descr.className = 'menu__item-descr';
+            // descr.innerText = this.descr;
+            // div.appendChild(descr);
+
+
+            // console.log(div);
+            // return div;
+        }
+    }
+
+    // let fields = document.querySelector('.menu__field .container');
+    // fields.innerHTML = '';
+
+    new MenuItem(
+        'img/tabs/vegy.jpg', 
+        'vegy', 
+        'Меню "Фитнес"', 
+        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 
+        9, 
+        '.menu .container'
+    ).createItem();
+
+    new MenuItem(
+        'img/tabs/elite.jpg', 
+        'elite', 
+        'Меню “Премиум”', 
+        'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!', 
+        8, 
+        '.menu .container'
+    ).createItem();
+
+    new MenuItem(
+        'img/tabs/post.jpg', 
+        'post', 
+        'Меню "Постное"', 
+        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.', 
+        10, 
+        '.menu .container'
+    ).createItem();
+    
+    // console.log(item.createItem());
+
     // Tabs
 
     const tabs = document.querySelectorAll('.tabheader__item'),
@@ -109,17 +198,19 @@ window.addEventListener('DOMContentLoaded', () => {
           modal = document.querySelector('.modal'),
           modalClose = document.querySelector('[data-close]');
     
+    function openModal () {
+        // modal.style.display = 'block';
+
+        // modal.classList.add('show');
+        // modal.classList.remove('hide');
+
+        modal.classList.toggle('show');
+        document.body.style.overflow = 'hidden'; 
+        clearInterval(modalTimerId);
+    }
+
     modalBtn.forEach(elem => {
-        // console.log();
-        elem.addEventListener('click', () => {
-            // modal.style.display = 'block';
-
-            // modal.classList.add('show');
-            // modal.classList.remove('hide');
-
-            modal.classList.toggle('show');
-            document.body.style.overflow = 'hidden';
-        });
+        elem.addEventListener('click', openModal);
     });
 
     function closeModal() {
@@ -140,4 +231,15 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    const modalTimerId = setTimeout(openModal, 150000);
+
+    function showModalByCroll () {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener('scroll', showModalByCroll);
+        }
+    }
+
+    window.addEventListener('scroll', showModalByCroll);
 });
